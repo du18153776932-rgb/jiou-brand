@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>积偶 · 包装延展设计方案</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500&family=Noto+Sans+SC:wght@300;400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+:root {
+  --bg:   #F5F0E8;
+  --ink:  #1E1B18;
+  --mid:  #7A7060;
+  --pale: #B8AFA0;
+  --rule: #D8D0C0;
+  --amber:#C49A3C;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ── */
+header {
+  background: var(--ink);
+  padding: 72px 100px 60px;
+}
+.h-label {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 13px; letter-spacing: .22em; color: rgba(240,232,220,.4);
+  margin-bottom: 16px;
+}
+.h-title {
+  font-family: 'Noto Serif SC', serif; font-weight: 400;
+  font-size: 42px; letter-spacing: .25em;
+  color: #EDE6D9; margin-bottom: 16px;
+}
+.h-sub {
+  font-size: 13px; letter-spacing: .12em; color: rgba(240,232,220,.4);
+  line-height: 2;
+}
+
+/* ── SECTION ── */
+.sec {
+  padding: 100px 100px 80px;
+  border-bottom: 1px solid var(--rule);
+}
+.sec-label {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 12px; letter-spacing: .22em; color: var(--mid);
+  margin-bottom: 12px;
+}
+.sec-title {
+  font-family: 'Noto Serif SC', serif; font-weight: 400;
+  font-size: 32px; letter-spacing: .2em;
+  color: var(--ink); margin-bottom: 48px;
+}
+
+/* ── PACKAGING ITEM ── */
+.pkg-row { display: flex; gap: 60px; align-items: flex-start; flex-wrap: wrap; }
+.pkg-item { flex: 1; min-width: 260px; }
+.pkg-preview {
+  height: 320px; position: relative; overflow: hidden;
+  margin-bottom: 28px;
+  background: #EEEAE2;
+}
+.pkg-name {
+  font-family: 'Noto Serif SC', serif; font-weight: 400;
+  font-size: 18px; letter-spacing: .2em; margin-bottom: 8px;
+}
+.pkg-desc {
+  font-size: 13px; letter-spacing: .07em; line-height: 2.2; color: var(--mid);
+  margin-bottom: 16px;
+}
+.pkg-spec {
+  font-size: 11px; letter-spacing: .14em; color: var(--pale);
+  line-height: 2;
+  border-top: 1px solid var(--rule); padding-top: 14px;
+}
+
+/* ─────────────────────────────────────
+   BOX ILLUSTRATIONS (pure CSS)
+───────────────────────────────────── */
+
+/* Slim single-bottle box */
+.box-single {
+  width: 110px; height: 260px;
+  position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+  background: var(--ink);
+  box-shadow: 6px 6px 0 rgba(30,27,24,.25);
+}
+.box-single::before {
+  content: '积偶';
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: 'Noto Serif SC', serif; font-weight: 400;
+  font-size: 24px; letter-spacing: .5em; color: #EDE6D9;
+  writing-mode: vertical-rl; margin-left: -10px;
+}
+.box-single::after {
+  content: '';
+  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+  width: 30px; height: 1px; background: rgba(240,232,220,.25);
+}
+.box-single-lid {
+  width: 110px; height: 20px;
+  position: absolute; bottom: 290px; left: 50%; transform: translateX(-50%);
+  background: rgba(30,27,24,.7);
+  box-shadow: 6px 0 0 rgba(30,27,24,.2);
+}
+
+/* Gift box 2-bottle */
+.box-gift {
+  width: 220px; height: 150px;
+  position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
+  background: var(--ink);
+  box-shadow: 8px 8px 0 rgba(30,27,24,.22);
+}
+.box-gift::before {
+  content: '积　偶';
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: 'Noto Serif SC', serif; font-weight: 400;
+  font-size: 18px; letter-spacing: .5em; color: rgba(240,232,220,.85);
+  white-space: nowrap;
+}
+.box-gift-ribbon-h {
+  position: absolute; top: 50%; left: 0; right: 0; height: 1px;
+  background: rgba(196,154,60,.4);
+  transform: translateY(-50%);
+}
+.box-gift-ribbon-v {
+  position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+  background: rgba(196,154,60,.4);
+  transform: translateX(-50%);
+}
+.box-gift-lid {
+  width: 220px; height: 18px;
+  position: absolute; bottom: 210px; left: 50%; transform: translateX(-50%);
+  background: rgba(30,27,24,.75);
+  box-shadow: 8px 0 0 rgba(30,27,24,.2);
+}
+/* Bow */
+.box-gift-bow {
+  position: absolute; bottom: 222px; left: 50%; transform: translateX(-50%);
+  width: 40px; height: 20px;
+}
+.box-gift-bow::before, .box-gift-bow::after {
+  content: '';
+  position: absolute; top: 0; width: 16px; height: 16px;
+  border: 1.5px solid rgba(196,154,60,.6); border-radius: 50%;
+}
+.box-gift-bow::before { left: 0; }
+.box-gift-bow::after { right: 0; }
+
+/* Tote bag */
+.bag-tote {
+  width: 160px; height: 200px;
+  position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%);
+  background: var(--bg);
+  border: 1.5px solid var(--ink);
+  box-shadow: 4px 4px 0 rgba(30,27,24,.1);
+}
+.bag-tote::before {
+  content: '积偶';
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: 'Noto Serif SC', serif; font-weight: 400;
+  font-size: 22px; letter-spacing: .4em; color: var(--ink);
+}
+.bag-tote::after {
+  content: '';
+  position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+  width: 28px; height: 1px; background: rgba(30,27,24,.2);
+}
+.bag-handle-l {
+  position: absolute; bottom: 250px; left: 42px;
+  width: 24px; height: 40px;
+  border: 1.5px solid var(--ink);
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+}
+.bag-handle-r {
+  position: absolute; bottom: 250px; right: 42px;
+  width: 24px; height: 40px;
+  border: 1.5px solid var(--ink);
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+}
+
+/* Tissue paper */
+.tissue {
+  width: 200px; height: 200px;
+  position: absolute;
+  bottom: 50px; left: 50%; transform: translateX(-50%) rotate(-3deg);
+  background: #F8F3E8;
+  border: 1px solid rgba(30,27,24,.08);
+  box-shadow: 2px 2px 8px rgba(30,27,24,.06);
+  overflow: hidden;
+}
+.tissue-pattern {
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, transparent, transparent 16px, rgba(196,154,60,.08) 16px, rgba(196,154,60,.08) 17px),
+    repeating-linear-gradient(-45deg, transparent, transparent 16px, rgba(196,154,60,.08) 16px, rgba(196,154,60,.08) 17px);
+}
+.tissue-text {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: 'Noto Serif SC', serif; font-size: 20px; letter-spacing: .5em;
+  color: rgba(30,27,24,.2); white-space: nowrap;
+}
+.tissue2 {
+  width: 200px; height: 200px;
+  position: absolute;
+  bottom: 60px; left: 50%; transform: translateX(-44%) rotate(4deg);
+  background: #F5F0E8;
+  border: 1px solid rgba(30,27,24,.06);
+}
+
+/* Label sticker */
+.sticker {
+  width: 160px; height: 200px;
+  position: absolute;
+  bottom: 60px; left: 50%; transform: translateX(-50%);
+  background: #F5F0E8;
+  border: 1px solid rgba(30,27,24,.15);
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 8px;
+  box-shadow: 0 2px 12px rgba(30,27,24,.06);
+}
+.sticker-logo {
+  font-family: 'Noto Serif SC', serif; font-weight: 400;
+  font-size: 28px; letter-spacing: .4em; color: var(--ink);
+}
+.sticker-rule { width: 32px; height: 1px; background: rgba(30,27,24,.2); }
+.sticker-en {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 11px; letter-spacing: .18em; color: var(--mid);
+}
+.sticker-vol {
+  font-family: 'EB Garamond', serif;
+  font-size: 13px; letter-spacing: .12em; color: var(--mid);
+  margin-top: 4px;
+}
+
+/* ── COLOR PALETTE SECTION ── */
+.palette-row { display: flex; gap: 0; margin-bottom: 48px; }
+.swatch { flex: 1; height: 80px; display: flex; align-items: flex-end; padding: 12px 16px; }
+.swatch span { font-size: 10px; letter-spacing: .12em; line-height: 1.8; }
+.sw-ink  { background: #1E1B18; } .sw-ink span  { color: rgba(240,232,220,.5); }
+.sw-cream{ background: #F5F0E8; border: 1px solid var(--rule); } .sw-cream span { color: var(--mid); }
+.sw-mid  { background: #EDE6D9; border: 1px solid var(--rule); } .sw-mid span  { color: var(--mid); }
+.sw-rule { background: #D8D0C0; } .sw-rule span { color: var(--ink); }
+.sw-amber{ background: #C49A3C; } .sw-amber span{ color: rgba(240,232,220,.8); }
+
+/* ── TYPOGRAPHY SECTION ── */
+.type-row { display: flex; gap: 60px; flex-wrap: wrap; }
+.type-item { flex: 1; min-width: 200px; }
+.type-sample {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule);
+}
+.type-label { font-size: 11px; letter-spacing: .18em; color: var(--pale); }
+
+/* ── MATERIAL NOTES ── */
+.notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.note-item { padding: 28px 32px; border: 1px solid var(--rule); }
+.note-title {
+  font-family: 'Noto Serif SC', serif; font-size: 15px; letter-spacing: .18em;
+  margin-bottom: 12px;
+}
+.note-body { font-size: 12px; letter-spacing: .08em; line-height: 2.2; color: var(--mid); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 44px 100px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid var(--rule);
+}
+.ft-logo { font-family: 'Noto Serif SC', serif; font-size: 16px; letter-spacing: .4em; }
+.ft-info { font-size: 11px; letter-spacing: .1em; color: var(--mid); text-align: right; line-height: 2; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-label">Packaging Design · 包装延展方案</div>
+  <h1 class="h-title">积偶 · 包装体系</h1>
+  <p class="h-sub">
+    单瓶礼盒 · 双瓶礼盒 · 手提袋 · 包装纸 · 品牌贴纸<br>
+    延续品牌视觉语言，适配精品礼品店与线下商超渠道
+  </p>
+</header>
+
+<!-- 01 单瓶礼盒 -->
+<div class="sec">
+  <div class="sec-label">01 · Single Gift Box</div>
+  <div class="sec-title">单瓶礼盒</div>
+  <div class="pkg-row">
+    <div class="pkg-item">
+      <div class="pkg-preview">
+        <div class="box-single-lid"></div>
+        <div class="box-single"></div>
+      </div>
+      <div class="pkg-name">单瓶抽拉式礼盒</div>
+      <div class="pkg-desc">抽拉盒设计，打开即见酒瓶。盒身正面烫印「积偶」二字，背面印品牌介绍与二维码。底部有品牌信息压凹印。</div>
+      <div class="pkg-spec">
+        材质建议：1200g 黑卡纸 + 哑膜<br>
+        工艺：烫金 / 烫银 + 压凹<br>
+        尺寸参考：110×110×300mm
+      </div>
+    </div>
+    <div class="pkg-item">
+      <div class="pkg-preview" style="background:#EAEAE8;">
+        <div class="box-single-lid" style="background:rgba(30,27,24,.5);"></div>
+        <div class="box-single" style="background:#F5F0E8; border:1.5px solid #1E1B18;">
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Noto Serif SC',serif;font-size:22px;letter-spacing:.5em;color:#1E1B18;writing-mode:vertical-rl;margin-left:-8px;">积偶</div>
+        </div>
+      </div>
+      <div class="pkg-name">单瓶礼盒 · 奶白版</div>
+      <div class="pkg-desc">以品牌奶白色为主调，深墨色字体，视觉更轻盈。适合夏季上市与女性用户群体。瓶身两侧可印品牌故事短句。</div>
+      <div class="pkg-spec">
+        材质建议：1000g 白卡纸 + 亮膜 / 亚膜<br>
+        工艺：UV 印刷 + 局部上光<br>
+        尺寸参考：110×110×300mm
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 双瓶礼盒 -->
+<div class="sec">
+  <div class="sec-label">02 · Duo Gift Box</div>
+  <div class="sec-title">双瓶礼盒套装</div>
+  <div class="pkg-row">
+    <div class="pkg-item">
+      <div class="pkg-preview">
+        <div class="box-gift-lid"></div>
+        <div class="box-gift">
+          <div class="box-gift-ribbon-h"></div>
+          <div class="box-gift-ribbon-v"></div>
+        </div>
+        <div class="box-gift-bow"></div>
+      </div>
+      <div class="pkg-name">双瓶天地盖礼盒</div>
+      <div class="pkg-desc">上翻盖设计，内衬植绒托架，双瓶并列呈现。外盒四面印品牌视觉语言，内侧印品牌故事。搭配品牌色丝带与贺卡槽。</div>
+      <div class="pkg-spec">
+        材质建议：1500g 灰板裱黑卡 + 哑膜<br>
+        工艺：烫金 + 压凹 + 内衬植绒<br>
+        尺寸参考：260×130×320mm
+      </div>
+    </div>
+    <div class="pkg-item" style="align-self:flex-start;">
+      <div style="padding:32px 0;">
+        <p style="font-family:'Noto Serif SC',serif;font-size:16px;letter-spacing:.18em;color:var(--ink);line-height:2.2;margin-bottom:24px;">礼盒内配件清单</p>
+        <div style="display:flex;flex-direction:column;gap:0;">
+          <div style="padding:16px 0;border-bottom:1px solid var(--rule);display:flex;gap:20px;">
+            <span style="font-size:11px;letter-spacing:.16em;color:var(--mid);width:80px;flex-shrink:0;">主体</span>
+            <span style="font-size:13px;letter-spacing:.1em;">天地盖礼盒 × 1</span>
+          </div>
+          <div style="padding:16px 0;border-bottom:1px solid var(--rule);display:flex;gap:20px;">
+            <span style="font-size:11px;letter-spacing:.16em;color:var(--mid);width:80px;flex-shrink:0;">内衬</span>
+            <span style="font-size:13px;letter-spacing:.1em;">植绒双瓶托架 × 1</span>
+          </div>
+          <div style="padding:16px 0;border-bottom:1px solid var(--rule);display:flex;gap:20px;">
+            <span style="font-size:11px;letter-spacing:.16em;color:var(--mid);width:80px;flex-shrink:0;">丝带</span>
+            <span style="font-size:13px;letter-spacing:.1em;">品牌色棉质丝带 × 1</span>
+          </div>
+          <div style="padding:16px 0;border-bottom:1px solid var(--rule);display:flex;gap:20px;">
+            <span style="font-size:11px;letter-spacing:.16em;color:var(--mid);width:80px;flex-shrink:0;">贺卡</span>
+            <span style="font-size:13px;letter-spacing:.1em;">空白贺卡 + 信封 × 1</span>
+          </div>
+          <div style="padding:16px 0;display:flex;gap:20px;">
+            <span style="font-size:11px;letter-spacing:.16em;color:var(--mid);width:80px;flex-shrink:0;">封口</span>
+            <span style="font-size:13px;letter-spacing:.1em;">品牌圆形贴纸 × 1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 手提袋 -->
+<div class="sec">
+  <div class="sec-label">03 · Tote Bag</div>
+  <div class="sec-title">品牌手提袋</div>
+  <div class="pkg-row">
+    <div class="pkg-item">
+      <div class="pkg-preview" style="background:#F0EAE0;">
+        <div class="bag-handle-l"></div>
+        <div class="bag-handle-r"></div>
+        <div class="bag-tote"></div>
+      </div>
+      <div class="pkg-name">奶白纸袋 · 竖版</div>
+      <div class="pkg-desc">自立式白牛皮纸袋，侧面印品牌文案短句，正面烫印「积偶」。适配单瓶装及双瓶礼盒提取。棉绳手提。</div>
+      <div class="pkg-spec">
+        材质：200g 本色牛皮纸 / 白牛皮纸<br>
+        工艺：单色印刷 + 局部烫金<br>
+        尺寸参考：160×90×320mm + 折边 40mm
+      </div>
+    </div>
+    <div class="pkg-item">
+      <div class="pkg-preview" style="background:#E8E4DC;">
+        <div class="bag-handle-l" style="border-color:#F5F0E8;"></div>
+        <div class="bag-handle-r" style="border-color:#F5F0E8;"></div>
+        <div class="bag-tote" style="background:var(--ink);border-color:var(--ink);">
+          <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Noto Serif SC',serif;font-size:20px;letter-spacing:.4em;color:#EDE6D9;">积偶</span>
+        </div>
+      </div>
+      <div class="pkg-name">深墨纸袋 · 礼赠版</div>
+      <div class="pkg-desc">深色版本，凸显高端礼品定位。品牌 LOGO 烫金或奶白印刷。适配精品店渠道及高档礼赠场景。</div>
+      <div class="pkg-spec">
+        材质：250g 黑色覆膜牛皮纸<br>
+        工艺：烫金印刷<br>
+        尺寸参考：160×90×320mm + 折边 40mm
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 04 包装纸 & 贴纸 -->
+<div class="sec">
+  <div class="sec-label">04 · Tissue Paper &amp; Sticker</div>
+  <div class="sec-title">包装纸 · 品牌贴纸</div>
+  <div class="pkg-row">
+    <div class="pkg-item">
+      <div class="pkg-preview" style="background:#D8D4CC;">
+        <div class="tissue2"></div>
+        <div class="tissue">
+          <div class="tissue-pattern"></div>
+          <div class="tissue-text">积偶</div>
+        </div>
+      </div>
+      <div class="pkg-name">品牌包装纸</div>
+      <div class="pkg-desc">细密斜纹暗花底纹，中心印「积偶」品牌标志。用于礼盒内酒瓶包裹。视觉精致，展开即是完整的品牌礼遇。</div>
+      <div class="pkg-spec">
+        材质：35g 拷贝纸 / 棉纸<br>
+        工艺：单色印刷，满版暗花<br>
+        规格：500×700mm
+      </div>
+    </div>
+    <div class="pkg-item">
+      <div class="pkg-preview" style="background:#E8E4DC;">
+        <div class="sticker">
+          <div class="sticker-logo">积偶</div>
+          <div class="sticker-rule"></div>
+          <div class="sticker-en">Jiou · Plum Wine</div>
+          <div class="sticker-vol">12% vol · 350ml</div>
+        </div>
+      </div>
+      <div class="pkg-name">品牌圆形封口贴 / 标签贴</div>
+      <div class="pkg-desc">圆形封口贴用于礼盒封口，矩形标签贴用于附加信息说明。均采用品牌视觉元素，材质建议铜版纸或磨砂防水贴。</div>
+      <div class="pkg-spec">
+        封口贴规格：直径 40mm（圆形）<br>
+        标签贴规格：60×90mm（矩形）<br>
+        工艺：CMYK + 局部亮光油
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 05 品牌色彩与材质指引 -->
+<div class="sec">
+  <div class="sec-label">05 · Color &amp; Material Guide</div>
+  <div class="sec-title">包装色彩 · 材质指引</div>
+
+  <p style="font-size:12px;letter-spacing:.14em;color:var(--mid);margin-bottom:28px;">包装体系延用品牌主色，严格控制在以下色板范围内。</p>
+  <div class="palette-row">
+    <div class="swatch sw-ink"><span>墨色<br>#1E1B18</span></div>
+    <div class="swatch sw-cream"><span>奶白<br>#F5F0E8</span></div>
+    <div class="swatch sw-mid"><span>暖米<br>#EDE6D9</span></div>
+    <div class="swatch sw-rule"><span>浅棕<br>#D8D0C0</span></div>
+    <div class="swatch sw-amber"><span>琥珀<br>#C49A3C</span></div>
+  </div>
+
+  <div class="notes-grid">
+    <div class="note-item">
+      <div class="note-title">主礼盒材质建议</div>
+      <div class="note-body">
+        外盒：灰板裱黑卡 1500g，哑膜覆面<br>
+        烫金工艺用于品牌 LOGO，增加高端质感<br>
+        压凹工艺用于品牌名称，增加触感层次<br>
+        避免亮膜，保持品牌"克制、东方"气质
+      </div>
+    </div>
+    <div class="note-item">
+      <div class="note-title">手提袋材质建议</div>
+      <div class="note-body">
+        首选本色牛皮纸或白牛皮纸，200–250g<br>
+        手提绳选用棉绳，避免塑料绳<br>
+        深色版建议覆哑膜，增加耐脏性<br>
+        印刷工艺尽量单色，与品牌极简风格一致
+      </div>
+    </div>
+    <div class="note-item">
+      <div class="note-title">文字规范</div>
+      <div class="note-body">
+        品牌中文：Noto Serif SC 400<br>
+        品牌英文：EB Garamond Italic<br>
+        字距：中文 ≥ 0.35em，英文 ≥ 0.14em<br>
+        正文：Noto Sans SC 300，不粗于 400
+      </div>
+    </div>
+    <div class="note-item">
+      <div class="note-title">禁用项</div>
+      <div class="note-body">
+        ✗ 禁用渐变色彩搭配（除品牌认可场景）<br>
+        ✗ 禁用红色、大红底色<br>
+        ✗ 禁用黑体、圆体等非品牌字体<br>
+        ✗ 禁用过多装饰性图案，保持留白感
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-logo">积偶</div>
+  <div class="ft-info">
+    Packaging Design System · 包装延展设计方案<br>
+    四川长蕴酒业有限责任公司 出品
+  </div>
+</footer>
+
+</body>
+</html>

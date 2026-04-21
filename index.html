@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>积偶 · 品牌物料全览</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500&family=Noto+Sans+SC:wght@300;400&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --bg:   oklch(96.5% 0.010 78);
+  --ink:  oklch(17%   0.014 52);
+  --mid:  oklch(52%   0.010 58);
+  --pale: oklch(86%   0.012 74);
+  --rule: oklch(88%   0.010 74);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ─── HEADER ─── */
+header {
+  padding: 80px 100px 64px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.h-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.h-logo {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 42px;
+  font-weight: 400;
+  letter-spacing: .45em;
+  line-height: 1;
+  color: var(--ink);
+}
+.h-en {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 15px;
+  letter-spacing: .18em;
+  color: var(--mid);
+}
+.h-desc {
+  font-size: 13px;
+  letter-spacing: .1em;
+  color: var(--mid);
+  line-height: 2;
+  text-align: right;
+  max-width: 280px;
+}
+
+/* ─── SECTION LABEL ─── */
+.section-tag {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: .22em;
+  color: var(--mid);
+  display: block;
+  padding: 52px 100px 28px;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* ─── GRID ─── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card {
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 52px 56px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: background .35s;
+  position: relative;
+  overflow: hidden;
+}
+.card:nth-child(3n) {
+  border-right: none;
+}
+.card:hover {
+  background: oklch(93.5% 0.013 76);
+}
+
+.card-num {
+  font-family: 'EB Garamond', serif;
+  font-size: 48px;
+  color: var(--rule);
+  line-height: 1;
+  margin-bottom: 36px;
+  transition: color .35s;
+}
+.card:hover .card-num { color: var(--pale); }
+
+.card-tag {
+  font-size: 11px;
+  letter-spacing: .22em;
+  color: var(--mid);
+  margin-bottom: 14px;
+}
+
+.card-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: .2em;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.card-desc {
+  font-size: 13px;
+  line-height: 2.2;
+  letter-spacing: .06em;
+  color: var(--mid);
+  flex: 1;
+}
+
+.card-arrow {
+  position: absolute;
+  bottom: 52px;
+  right: 56px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .35s, transform .35s;
+}
+.card:hover .card-arrow {
+  border-color: var(--ink);
+  transform: translate(2px, -2px);
+}
+.card-arrow svg {
+  width: 12px;
+  height: 12px;
+  stroke: var(--mid);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke .35s;
+}
+.card:hover .card-arrow svg { stroke: var(--ink); }
+
+.card-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .5s ease;
+}
+.card:hover .card-bar { transform: scaleX(1); }
+
+/* ─── WIDE CARD (full row) ─── */
+.card-wide {
+  grid-column: span 3;
+  border-right: none;
+  flex-direction: row;
+  align-items: center;
+  gap: 80px;
+  padding: 56px 100px;
+}
+.card-wide .card-num { margin-bottom: 0; font-size: 64px; flex-shrink: 0; }
+.card-wide .card-body { flex: 1; }
+.card-wide .card-title { font-size: 26px; margin-bottom: 14px; }
+.card-wide .card-arrow { position: static; margin-left: auto; flex-shrink: 0; }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 44px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ft-logo {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: .38em;
+}
+.ft-info {
+  font-size: 11px;
+  letter-spacing: .1em;
+  color: var(--mid);
+  text-align: right;
+  line-height: 2;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  header { padding: 60px 40px 48px; flex-direction: column; gap: 24px; align-items: flex-start; }
+  .h-desc { text-align: left; }
+  .section-tag { padding: 40px 40px 24px; }
+  .grid { grid-template-columns: 1fr; }
+  .card, .card:nth-child(3n) { border-right: none; }
+  .card-wide { grid-column: span 1; flex-direction: column; gap: 32px; padding: 48px 40px; }
+  .card-wide .card-arrow { margin-left: 0; }
+  footer { padding: 44px 40px; flex-direction: column; gap: 20px; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-brand">
+    <div class="h-logo">积偶</div>
+    <div class="h-en">Jiou · Plum Wine</div>
+  </div>
+  <p class="h-desc">
+    四川峨边高山青梅<br>
+    鲜果发酵 · 零添加<br>
+    12% vol · 350ml
+  </p>
+</header>
+
+<span class="section-tag">Brand Materials — 品牌物料全览</span>
+
+<div class="grid">
+
+  <a class="card" href="project/jiou-landing.html" target="_blank">
+    <div class="card-num">01</div>
+    <div class="card-tag">LANDING PAGE</div>
+    <h2 class="card-title">产品官网<br>落地页</h2>
+    <p class="card-desc">全屏视觉落地页。滚动渐显、视差轻动，建立品牌第一印象。含产品故事、规格参数、饮用场景与招商引流入口。</p>
+    <div class="card-arrow">
+      <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+    </div>
+    <div class="card-bar"></div>
+  </a>
+
+  <a class="card" href="project/jiou-brand.html" target="_blank">
+    <div class="card-num">02</div>
+    <div class="card-tag">BRAND GUIDE</div>
+    <h2 class="card-title">品牌视觉<br>规范手册</h2>
+    <p class="card-desc">色板、字体、Logo 用法、摄影风格与文案语气规范。后续所有物料的基准文件，确保视觉输出一致。</p>
+    <div class="card-arrow">
+      <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+    </div>
+    <div class="card-bar"></div>
+  </a>
+
+  <a class="card" href="project/jiou-detail.html" target="_blank">
+    <div class="card-num">03</div>
+    <div class="card-tag">E-COMMERCE</div>
+    <h2 class="card-title">电商详情页<br>750px 竖版</h2>
+    <p class="card-desc">天猫 / 京东标准宽度 750px，竖版长图风格。涵盖产品卖点、原料工艺、配料表与品牌故事，适配移动端浏览习惯。</p>
+    <div class="card-arrow">
+      <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+    </div>
+    <div class="card-bar"></div>
+  </a>
+
+  <a class="card" href="project/jiou-xiaohongshu.html" target="_blank">
+    <div class="card-num">04</div>
+    <div class="card-tag">SOCIAL MEDIA</div>
+    <h2 class="card-title">小红书<br>内容模板</h2>
+    <p class="card-desc">6 张 1:1 方图模板，覆盖产品主图、品牌故事、零添加配料、饮用场景、度数标注与产地展示，风格统一可直接导出发布。</p>
+    <div class="card-arrow">
+      <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+    </div>
+    <div class="card-bar"></div>
+  </a>
+
+  <a class="card card-wide" href="project/jiou-deck.html" target="_blank">
+    <div class="card-num">05</div>
+    <div class="card-body">
+      <div class="card-tag">PITCH DECK</div>
+      <h2 class="card-title">品牌招商介绍册</h2>
+      <p class="card-desc">1920×1080 幻灯片格式，键盘 ← / → 翻页，支持打印导出为 PDF。适用于线下招商、精品选手洽谈及投资人展示。</p>
+    </div>
+    <div class="card-arrow">
+      <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+    </div>
+    <div class="card-bar"></div>
+  </a>
+
+</div>
+
+<span class="section-tag">New Modules · 新增模块</span>
+
+<div class="grid">
+
+  <a class="card" href="project/jiou-story.html" target="_blank">
+    <div class="card-num">06</div>
+    <div class="card-tag">BRAND STORY</div>
+    <h2 class="card-title">品牌故事<br>独立页</h2>
+    <p class="card-desc">沉浸式叙事长页。名字由来、产地故事、酿造工艺、品牌哲学完整呈现，滚动渐显动效，可作为独立品牌介绍页使用。</p>
+    <div class="card-arrow">
+      <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+    </div>
+    <div class="card-bar"></div>
+  </a>
+
+  <a class="card" href="project/jiou-packaging.html" target="_blank">
+    <div class="card-num">07</div>
+    <div class="card-tag">PACKAGING</div>
+    <h2 class="card-title">包装延展<br>设计方案</h2>
+    <p class="card-desc">单瓶礼盒、双瓶礼盒套装、手提袋（深浅两色）、品牌包装纸、封口贴。含材质工艺建议与品牌包装禁用规范。</p>
+    <div class="card-arrow">
+      <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+    </div>
+    <div class="card-bar"></div>
+  </a>
+
+  <a class="card" href="project/jiou-moments.html" target="_blank">
+    <div class="card-num">08</div>
+    <div class="card-tag">WECHAT MOMENTS</div>
+    <h2 class="card-title">朋友圈<br>内容模板</h2>
+    <p class="card-desc">5 张竖版模板（375×667），附配套文案与话题标签。覆盖产品主图、品牌故事、零添加配料、场景独饮、节气海报，可直接截图发布。</p>
+    <div class="card-arrow">
+      <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+    </div>
+    <div class="card-bar"></div>
+  </a>
+
+  <a class="card card-wide" href="project/jiou-scenes.html" target="_blank">
+    <div class="card-num">09</div>
+    <div class="card-body">
+      <div class="card-tag">SCENE IMAGES</div>
+      <h2 class="card-title">宣传效果图 · 8 场景</h2>
+      <p class="card-desc">1080×1080 方图，8 种情绪与场合：清晨独处、梅雨时节、傍晚小酌、礼赠心意、露台微醺、节气谷雨、峨眉山麓、积累的偶然。可截图直发自媒体。</p>
+    </div>
+    <div class="card-arrow">
+      <svg viewBox="0 0 12 12"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+    </div>
+    <div class="card-bar"></div>
+  </a>
+
+</div>
+
+<footer>
+  <div class="ft-logo">积偶</div>
+  <div class="ft-info">
+    生产单位：四川长蕴酒业有限责任公司<br>
+    地址：四川省峨眉山市绥山镇净安村 4 组 59 号
+  </div>
+</footer>
+
+</body>
+</html>
