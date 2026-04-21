@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>积偶 · 小红书内容模板</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500&family=Noto+Sans+SC:wght@300;400&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Noto Sans SC', sans-serif; -webkit-font-smoothing: antialiased; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+// ── 嵌入产品图 ──
+const BOTTLE = "bottle-sm.png";
+
+// ── 颜色变量 ──
+const C = {
+  ink:    '#1E1B18',
+  cream:  '#F5F0E8',
+  mid:    '#EDE6D9',
+  deep:   '#E0D6C5',
+  pale:   '#B8AFA0',
+  rule:   '#D8D0C0',
+  amber:  '#C49A3C',
+  amberL: '#D9B96A',
+  smoke:  '#7A7060',
+  sage:   '#5E8C6A',
+};
+
+// ── 每张卡片 1080×1080 ──
+const S = 1080;
+
+/* ════════════════════════════════
+   CARD 01 — 产品主图
+════════════════════════════════ */
+function Card01() {
+  return (
+    <div style={{width:S,height:S,background:C.ink,position:'relative',overflow:'hidden',fontFamily:'Noto Serif SC, serif'}}>
+      {/* 大字水印 */}
+      <div style={{
+        position:'absolute',bottom:-80,right:-40,
+        fontSize:580,fontWeight:500,lineHeight:1,letterSpacing:'-.02em',
+        color:'transparent',WebkitTextStroke:'1px #2A2724',
+        userSelect:'none',pointerEvents:'none',
+      }}>偶</div>
+
+      {/* 顶部标签行 */}
+      <div style={{
+        position:'absolute',top:72,left:80,right:80,
+        display:'flex',justifyContent:'space-between',alignItems:'center',
+      }}>
+        <span style={{fontFamily:'EB Garamond, serif',fontStyle:'italic',fontSize:22,letterSpacing:'.14em',color:'#5A5448'}}>
+          plum wine
+        </span>
+        <span style={{fontSize:13,letterSpacing:'.22em',color:'#3A3730',border:'1px solid #2E2B26',padding:'6px 16px'}}>
+          350 ml · 12%
+        </span>
+      </div>
+
+      {/* 产品瓶 */}
+      <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-54%)',zIndex:1}}>
+        <img src={BOTTLE} alt="积偶青梅酒" style={{width:360,filter:'drop-shadow(0 40px 80px rgba(0,0,0,.4))'}} />
+      </div>
+
+      {/* 底部文字区 */}
+      <div style={{
+        position:'absolute',bottom:0,left:0,right:0,
+        padding:'48px 80px 72px',
+        borderTop:'1px solid #2A2724',
+        display:'flex',justifyContent:'space-between',alignItems:'flex-end',
+        zIndex:2,
+      }}>
+        <div>
+          <div style={{fontSize:88,letterSpacing:'.45em',color:'#EDE6D9',lineHeight:1,marginBottom:8}}>积&ensp;偶</div>
+          <div style={{fontFamily:'EB Garamond, serif',fontStyle:'italic',fontSize:20,letterSpacing:'.12em',color:'#5A5448'}}>
+            Fermented Plum Wine
+          </div>
+        </div>
+        <div style={{textAlign:'right'}}>
+          <div style={{fontSize:28,letterSpacing:'.3em',color:C.amber,lineHeight:2}}>此刻</div>
+          <div style={{fontSize:28,letterSpacing:'.3em',color:C.amber,lineHeight:2}}>刚好</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ════════════════════════════════
+   CARD 02 — 品牌故事
+════════════════════════════════ */
+function Card02() {
+  return (
+    <div style={{width:S,height:S,background:C.cream,position:'relative',overflow:'hidden',fontFamily:'Noto Serif SC, serif'}}>
+
+      {/* 竖线装饰 */}
+      <div style={{position:'absolute',top:0,left:120,width:1,height:'100%',background:C.rule}} />
+
+      {/* 引号 */}
+      <div style={{
+        position:'absolute',top:100,left:80,
+        fontFamily:'EB Garamond, serif',fontSize:200,lineHeight:.8,
+        color:C.rule,userSelect:'none',pointerEvents:'none',
+      }}>"</div>
+
+      {/* 主文案 */}
+      <div style={{position:'absolute',top:200,left:160,right:80}}>
+        <div style={{
+          fontSize:22,letterSpacing:'.14em',lineHeight:1.4,color:C.smoke,
+          marginBottom:52,fontFamily:'Noto Sans SC, sans-serif',fontWeight:300,
+        }}>Brand Story · 品牌故事</div>
+
+        <div style={{fontSize:56,letterSpacing:'.22em',lineHeight:1.6,color:C.ink,marginBottom:48}}>
+          不是为了忘<br/>是为了记
+        </div>
+
+        <div style={{width:40,height:1,background:C.rule,marginBottom:40}} />
+
+        <div style={{
+          fontSize:26,letterSpacing:'.14em',lineHeight:2.2,color:C.smoke,
+          fontFamily:'Noto Sans SC, sans-serif',fontWeight:300,
+        }}>
+          那些慢慢堆叠起来的<br/>
+          刚好的时间<br/>
+          刚好的心情<br/>
+          刚好遇见的自己
+        </div>
+      </div>
+
+      {/* 底部品牌 */}
+      <div style={{
+        position:'absolute',bottom:72,left:160,
+        display:'flex',alignItems:'baseline',gap:24,
+      }}>
+        <span style={{fontSize:36,letterSpacing:'.4em',color:C.ink}}>积&ensp;偶</span>
+        <span style={{fontFamily:'EB Garamond, serif',fontStyle:'italic',fontSize:18,letterSpacing:'.1em',color:C.pale}}>
+          JIOU
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* ════════════════════════════════
+   CARD 03 — 零添加卖点
+════════════════════════════════ */
+function Card03() {
+  const items = [
+    {n:'青梅',s:'峨边高山时令鲜果'},
+    {n:'水',  s:'山泉软水'},
+    {n:'酒精',s:'发酵生成'},
+    {n:'糖',  s:'适量，非代糖'},
+  ];
+  return (
+    <div style={{width:S,height:S,background:C.ink,position:'relative',overflow:'hidden',fontFamily:'Noto Serif SC, serif'}}>
+
+      {/* 顶部区域 */}
+      <div style={{padding:'80px 80px 0'}}>
+        <div style={{fontFamily:'EB Garamond, serif',fontStyle:'italic',fontSize:22,letterSpacing:'.2em',color:'#5A5448',marginBottom:20}}>
+          Zero Additives
+        </div>
+        <div style={{fontSize:56,letterSpacing:'.2em',lineHeight:1.4,color:'#EDE6D9',marginBottom:12}}>
+          配料只有<br/>四种
+        </div>
+        <div style={{fontSize:22,letterSpacing:'.14em',color:C.amber,fontFamily:'Noto Sans SC, sans-serif',fontWeight:300}}>
+          好东西，不需要掩盖
+        </div>
+      </div>
+
+      {/* 分割线 */}
+      <div style={{height:1,background:'#2A2724',margin:'48px 80px'}} />
+
+      {/* 配料格子 */}
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:2,margin:'0 80px'}}>
+        {items.map(({n,s}) => (
+          <div key={n} style={{background:'#242220',padding:'36px 32px'}}>
+            <div style={{fontSize:42,letterSpacing:'.2em',color:C.amber,marginBottom:10}}>{n}</div>
+            <div style={{fontSize:20,letterSpacing:'.1em',color:'#5A5448',fontFamily:'Noto Sans SC, sans-serif',fontWeight:300}}>{s}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* 底部 */}
+      <div style={{
+        position:'absolute',bottom:72,left:80,right:80,
+        display:'flex',justifyContent:'space-between',alignItems:'flex-end',
+      }}>
+        <span style={{fontSize:32,letterSpacing:'.4em',color:'#EDE6D9'}}>积&ensp;偶</span>
+        <span style={{fontSize:18,letterSpacing:'.16em',color:'#3A3730',
+          border:'1px solid #2E2B26',padding:'8px 18px'}}>
+          鲜果发酵 · 零添加
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* ════════════════════════════════
+   CARD 04 — 场景：独处的傍晚
+════════════════════════════════ */
+function Card04() {
+  return (
+    <div style={{width:S,height:S,background:C.mid,position:'relative',overflow:'hidden',fontFamily:'Noto Serif SC, serif'}}>
+
+      {/* 上半：文字主体 */}
+      <div style={{padding:'88px 80px 0'}}>
+        <div style={{fontSize:22,letterSpacing:'.2em',color:C.pale,marginBottom:44,fontFamily:'EB Garamond, serif',fontStyle:'italic'}}>
+          Occasion 01
+        </div>
+        <div style={{fontSize:72,letterSpacing:'.18em',lineHeight:1.25,color:C.ink,marginBottom:40}}>
+          独处的<br/>傍晚
+        </div>
+        <div style={{width:40,height:1,background:C.rule,marginBottom:36}} />
+        <div style={{
+          fontSize:26,letterSpacing:'.1em',lineHeight:2,color:C.smoke,
+          fontFamily:'Noto Sans SC, sans-serif',fontWeight:300,maxWidth:500,
+        }}>
+          一个人的桌<br/>一瓶刚开的酒<br/>不需要理由<br/>就是今天，就是此刻
+        </div>
+      </div>
+
+      {/* 下半：产品 + 标签 */}
+      <div style={{
+        position:'absolute',bottom:0,left:0,right:0,
+        background:C.ink,padding:'44px 80px 64px',
+        display:'flex',alignItems:'center',justifyContent:'space-between',
+      }}>
+        <img src={BOTTLE} alt="积偶" style={{width:120,filter:'drop-shadow(0 16px 32px rgba(0,0,0,.3))'}} />
+        <div style={{textAlign:'right'}}>
+          <div style={{fontSize:40,letterSpacing:'.4em',color:'#EDE6D9',marginBottom:8}}>积&ensp;偶</div>
+          <div style={{fontFamily:'EB Garamond, serif',fontStyle:'italic',fontSize:18,letterSpacing:'.1em',color:'#5A5448'}}>
+            Plum Wine · 12%
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ════════════════════════════════
+   CARD 05 — 送礼推荐
+════════════════════════════════ */
+function Card05() {
+  return (
+    <div style={{width:S,height:S,background:C.cream,position:'relative',overflow:'hidden',fontFamily:'Noto Serif SC, serif'}}>
+
+      {/* 背景大字 */}
+      <div style={{
+        position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',
+        fontSize:480,fontWeight:500,color:'transparent',
+        WebkitTextStroke:'1px '+C.rule,
+        letterSpacing:'.05em',lineHeight:1,
+        userSelect:'none',pointerEvents:'none',
+      }}>礼</div>
+
+      {/* 内容 */}
+      <div style={{position:'relative',zIndex:1,display:'flex',flexDirection:'column',height:'100%',padding:'80px'}}>
+        {/* 顶 */}
+        <div>
+          <div style={{fontFamily:'EB Garamond, serif',fontStyle:'italic',fontSize:22,letterSpacing:'.18em',color:C.pale,marginBottom:20}}>
+            Gift
+          </div>
+          <div style={{fontSize:60,letterSpacing:'.2em',lineHeight:1.4,color:C.ink}}>
+            送出的<br/>心意
+          </div>
+        </div>
+
+        {/* 中：产品居中 */}
+        <div style={{flex:1,display:'flex',alignItems:'center',justifyContent:'center'}}>
+          <img src={BOTTLE} alt="积偶" style={{width:260,filter:'drop-shadow(0 24px 48px rgba(30,27,24,.12))'}} />
+        </div>
+
+        {/* 底 */}
+        <div style={{borderTop:'1px solid '+C.rule,paddingTop:36}}>
+          <div style={{
+            fontSize:28,letterSpacing:'.18em',lineHeight:2,color:C.smoke,
+            fontFamily:'Noto Sans SC, sans-serif',fontWeight:300,
+            marginBottom:24,
+          }}>
+            不用想太多<br/>
+            一瓶青梅酒就是<br/>
+            <span style={{color:C.ink}}>——&ensp;我想到你了</span>
+          </div>
+          <div style={{display:'flex',gap:16}}>
+            <span style={{fontSize:14,letterSpacing:'.18em',color:C.pale,border:'1px solid '+C.rule,padding:'6px 14px'}}>礼盒装</span>
+            <span style={{fontSize:14,letterSpacing:'.18em',color:C.pale,border:'1px solid '+C.rule,padding:'6px 14px'}}>支持刻字</span>
+            <span style={{fontSize:14,letterSpacing:'.18em',color:C.pale,border:'1px solid '+C.rule,padding:'6px 14px'}}>全国发货</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ════════════════════════════════
+   CARD 06 — 怎么喝
+════════════════════════════════ */
+function Card06() {
+  const ways = [
+    {t:'纯饮',d:'冰镇至 8–12°C，最能感受青梅的酸甜层次'},
+    {t:'加冰',d:'大冰块慢融，口感清爽，适合夏天'},
+    {t:'加苏打',d:'1:1 兑苏打水，加柠檬片，轻盈气泡版'},
+  ];
+  return (
+    <div style={{width:S,height:S,background:C.deep,position:'relative',overflow:'hidden',fontFamily:'Noto Serif SC, serif'}}>
+      <div style={{padding:'80px 80px 0'}}>
+        <div style={{fontFamily:'EB Garamond, serif',fontStyle:'italic',fontSize:22,letterSpacing:'.18em',color:C.pale,marginBottom:20}}>
+          How to Enjoy
+        </div>
+        <div style={{fontSize:72,letterSpacing:'.18em',lineHeight:1.25,color:C.ink,marginBottom:48}}>
+          积偶<br/>怎么喝
+        </div>
+      </div>
+
+      {/* 喝法列表 */}
+      <div style={{margin:'0 80px',display:'flex',flexDirection:'column',gap:0,border:'1px solid '+C.rule}}>
+        {ways.map(({t,d},i) => (
+          <div key={t} style={{
+            display:'flex',gap:32,alignItems:'flex-start',
+            padding:'36px 36px',
+            borderBottom: i < ways.length-1 ? '1px solid '+C.rule : 'none',
+            background: i % 2 === 0 ? C.cream : C.mid,
+          }}>
+            <div style={{
+              width:52,height:52,borderRadius:'50%',
+              background:C.ink,flexShrink:0,
+              display:'flex',alignItems:'center',justifyContent:'center',
+              fontSize:18,letterSpacing:'.1em',color:C.cream,
+            }}>0{i+1}</div>
+            <div>
+              <div style={{fontSize:28,letterSpacing:'.16em',marginBottom:8,color:C.ink}}>{t}</div>
+              <div style={{fontSize:20,letterSpacing:'.08em',lineHeight:1.8,color:C.smoke,fontFamily:'Noto Sans SC, sans-serif',fontWeight:300}}>{d}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* 底部 */}
+      <div style={{
+        position:'absolute',bottom:64,left:80,right:80,
+        display:'flex',justifyContent:'space-between',alignItems:'center',
+      }}>
+        <span style={{fontSize:32,letterSpacing:'.4em',color:C.ink}}>积&ensp;偶</span>
+        <span style={{fontSize:18,letterSpacing:'.14em',color:C.pale}}>低醇轻饮 · 12% vol</span>
+      </div>
+    </div>
+  );
+}
+
+/* ════════════════════════════════
+   APP
+════════════════════════════════ */
+function App() {
+  const cards = [
+    {id:'c1', label:'01 · 产品主图', C: Card01},
+    {id:'c2', label:'02 · 品牌故事', C: Card02},
+    {id:'c3', label:'03 · 零添加', C: Card03},
+    {id:'c4', label:'04 · 场景傍晚', C: Card04},
+    {id:'c5', label:'05 · 送礼推荐', C: Card05},
+    {id:'c6', label:'06 · 怎么喝', C: Card06},
+  ];
+
+  return (
+    <DesignCanvas>
+      <DCSection id="xhs" title="积偶 · 小红书内容模板" subtitle="1080 × 1080 px · 点击右上角放大查看">
+        {cards.map(({id,label,C:Comp}) => (
+          <DCArtboard key={id} id={id} label={label} width={1080} height={1080}>
+            <Comp />
+          </DCArtboard>
+        ))}
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

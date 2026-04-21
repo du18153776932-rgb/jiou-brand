@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="zh-CN" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google" content="notranslate">
+<title>积偶 · 品牌视觉规范</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500&family=Noto+Sans+SC:wght@300;400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       oklch(96.5% 0.010 78);
+  --bg-mid:   oklch(93%   0.014 76);
+  --bg-deep:  oklch(88%   0.018 74);
+  --ink:      oklch(17%   0.014 52);
+  --mid:      oklch(52%   0.010 58);
+  --pale:     oklch(82%   0.012 72);
+  --rule:     oklch(88%   0.010 74);
+  --amber:    oklch(66%   0.130 66);
+  --amber-l:  oklch(80%   0.100 72);
+  --sage:     oklch(62%   0.080 148);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── PAGE LAYOUT ── */
+.page-wrap { max-width: 1240px; margin: 0 auto; padding: 0 80px; }
+
+/* ── COVER ── */
+.cover {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 80px;
+  background: var(--ink);
+  position: relative; overflow: hidden;
+}
+.cover-ghost {
+  position: absolute; top: -60px; right: -40px;
+  font-family: 'Noto Serif SC', serif; font-weight: 500;
+  font-size: 480px; line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px oklch(28% 0.010 52);
+  pointer-events: none; user-select: none;
+  letter-spacing: -.02em;
+}
+.cover-label {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 14px; letter-spacing: .22em; color: oklch(55% 0.010 62);
+  margin-bottom: 28px;
+}
+.cover-title {
+  font-family: 'Noto Serif SC', serif; font-weight: 400;
+  font-size: clamp(48px, 7vw, 96px); letter-spacing: .35em;
+  color: oklch(93% 0.010 78); line-height: 1; margin-bottom: 14px;
+}
+.cover-sub {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 20px; letter-spacing: .12em;
+  color: oklch(55% 0.010 62); margin-bottom: 60px;
+}
+.cover-meta {
+  display: flex; gap: 60px;
+  border-top: 1px solid oklch(28% 0.010 52);
+  padding-top: 32px;
+}
+.cover-meta-item { display: flex; flex-direction: column; gap: 6px; }
+.cover-meta-k { font-size: 10px; letter-spacing: .24em; color: oklch(40% 0.009 58); }
+.cover-meta-v {
+  font-family: 'EB Garamond', serif; font-size: 16px;
+  letter-spacing: .1em; color: oklch(70% 0.010 68);
+}
+
+/* ── SECTION TITLE ── */
+.sec-head {
+  padding: 100px 80px 56px;
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: baseline; gap: 28px;
+}
+.sec-num {
+  font-family: 'EB Garamond', serif; font-size: 18px;
+  letter-spacing: .08em; color: var(--pale);
+}
+.sec-name {
+  font-family: 'Noto Serif SC', serif; font-weight: 400;
+  font-size: clamp(24px, 3vw, 36px); letter-spacing: .2em; color: var(--ink);
+}
+.sec-name-en {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 15px; letter-spacing: .14em; color: var(--mid);
+  margin-left: auto;
+}
+
+/* ── COLORS ── */
+.colors-section { padding: 64px 80px 100px; }
+.color-row { display: flex; gap: 0; margin-bottom: 32px; }
+.swatch {
+  flex: 1; height: 140px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 18px 22px;
+  transition: flex .4s ease;
+  cursor: default;
+  position: relative;
+}
+.swatch:hover { flex: 2; }
+.swatch-name {
+  font-family: 'Noto Serif SC', serif; font-size: 13px;
+  letter-spacing: .12em; line-height: 1;
+  margin-bottom: 4px;
+}
+.swatch-hex {
+  font-family: 'EB Garamond', serif; font-size: 13px;
+  letter-spacing: .1em; opacity: .65;
+}
+.swatch-role {
+  position: absolute; top: 18px; left: 22px;
+  font-size: 10px; letter-spacing: .2em; opacity: .55;
+}
+
+.color-usage { margin-top: 48px; }
+.cu-title {
+  font-size: 11px; letter-spacing: .22em; color: var(--mid);
+  margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--rule);
+}
+.cu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); }
+.cu-item {
+  background: var(--bg); padding: 24px 28px;
+}
+.cu-dot {
+  width: 20px; height: 20px; border-radius: 50%;
+  margin-bottom: 14px;
+}
+.cu-k { font-size: 12px; letter-spacing: .14em; color: var(--mid); margin-bottom: 6px; }
+.cu-v { font-size: 14px; letter-spacing: .06em; line-height: 1.8; }
+
+/* ── TYPOGRAPHY ── */
+.type-section { padding: 64px 80px 100px; }
+.type-block { margin-bottom: 64px; padding-bottom: 64px; border-bottom: 1px solid var(--rule); }
+.type-block:last-child { border-bottom: none; margin-bottom: 0; }
+.type-meta {
+  display: flex; gap: 48px; margin-bottom: 32px;
+}
+.tm-item { display: flex; flex-direction: column; gap: 4px; }
+.tm-k { font-size: 10px; letter-spacing: .22em; color: var(--mid); }
+.tm-v { font-size: 13px; letter-spacing: .08em; color: var(--ink); }
+
+.type-sample-zh {
+  font-family: 'Noto Serif SC', serif; font-weight: 400;
+  font-size: clamp(32px, 4vw, 56px); letter-spacing: .35em;
+  line-height: 1.4; color: var(--ink);
+  margin-bottom: 16px;
+}
+.type-sample-en {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 36px; letter-spacing: .1em; color: var(--ink);
+  line-height: 1.4; margin-bottom: 16px;
+}
+.type-sample-body {
+  font-family: 'Noto Sans SC', sans-serif; font-weight: 300;
+  font-size: 16px; letter-spacing: .08em; line-height: 2.2;
+  color: var(--mid); max-width: 560px;
+}
+.type-scale {
+  display: flex; flex-direction: column; gap: 12px; margin-top: 32px;
+}
+.ts-row {
+  display: flex; align-items: baseline; gap: 24px;
+  padding: 16px 0; border-bottom: 1px solid var(--rule);
+}
+.ts-label { font-size: 10px; letter-spacing: .2em; color: var(--mid); width: 90px; flex-shrink: 0; }
+.ts-sample { font-family: 'Noto Serif SC', serif; font-weight: 400; letter-spacing: .2em; }
+.ts-spec { font-size: 11px; color: var(--pale); margin-left: auto; font-family: 'EB Garamond', serif; letter-spacing: .08em; }
+
+/* ── LOGO ── */
+.logo-section { padding: 64px 80px 100px; }
+.logo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); }
+.logo-card {
+  padding: 64px 48px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  min-height: 280px;
+}
+.logo-card.dark { background: var(--ink); }
+.logo-card.light { background: var(--bg); }
+.logo-card.mid   { background: var(--bg-mid); }
+.logo-card.amber { background: var(--amber); }
+.logo-display {
+  font-family: 'Noto Serif SC', serif; font-weight: 400;
+  font-size: 72px; letter-spacing: .5em; line-height: 1;
+}
+.logo-display.on-dark { color: oklch(93% 0.010 78); }
+.logo-display.on-light { color: var(--ink); }
+.logo-display.on-amber { color: oklch(93% 0.010 78); }
+.logo-card-label { font-size: 11px; letter-spacing: .2em; }
+.logo-card.dark .logo-card-label { color: oklch(40% 0.009 58); }
+.logo-card.light .logo-card-label, .logo-card.mid .logo-card-label { color: var(--pale); }
+.logo-card.amber .logo-card-label { color: oklch(80% 0.08 70); }
+
+.logo-rules { margin-top: 56px; }
+.lr-title { font-size: 11px; letter-spacing: .22em; color: var(--mid); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--rule); }
+.lr-list { display: flex; flex-direction: column; gap: 0; }
+.lr-item {
+  display: flex; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--rule); align-items: flex-start;
+}
+.lr-num { font-family: 'EB Garamond', serif; font-size: 18px; color: var(--pale); width: 28px; flex-shrink: 0; }
+.lr-text { font-size: 14px; letter-spacing: .06em; line-height: 2; color: var(--ink); }
+.lr-text strong { font-weight: 400; font-family: 'Noto Serif SC', serif; }
+
+/* ── VOICE ── */
+.voice-section { padding: 64px 80px 100px; background: var(--ink); }
+.voice-section .sec-head { padding: 0 0 56px; border-bottom-color: oklch(28% 0.010 52); }
+.voice-section .sec-num { color: oklch(32% 0.009 55); }
+.voice-section .sec-name { color: oklch(88% 0.010 76); }
+.voice-section .sec-name-en { color: oklch(45% 0.010 60); }
+.voice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: oklch(26% 0.010 52); margin-top: 48px; }
+.vc {
+  padding: 44px 40px;
+  background: var(--ink);
+}
+.vc-label {
+  font-size: 10px; letter-spacing: .24em; color: oklch(42% 0.009 58);
+  margin-bottom: 18px;
+}
+.vc-title {
+  font-family: 'Noto Serif SC', serif; font-weight: 400;
+  font-size: 20px; letter-spacing: .2em; color: oklch(82% 0.010 74);
+  margin-bottom: 20px;
+}
+.vc-examples { display: flex; flex-direction: column; gap: 14px; }
+.vc-ex {
+  font-size: 14px; letter-spacing: .06em; line-height: 2;
+  color: oklch(55% 0.009 60); padding-left: 16px;
+  border-left: 2px solid oklch(30% 0.010 52);
+}
+.vc-ex.good { border-left-color: var(--amber); color: oklch(75% 0.010 72); }
+.vc-ex.bad  { border-left-color: oklch(30% 0.010 52); }
+
+/* ── SPACING ── */
+.spacing-section { padding: 64px 80px 100px; }
+.sp-demo {
+  display: flex; align-items: flex-end; gap: 0;
+  margin-top: 40px; margin-bottom: 56px;
+  border-bottom: 1px solid var(--rule); padding-bottom: 32px;
+}
+.sp-bar {
+  background: var(--bg-mid);
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+  padding-bottom: 12px; gap: 6px;
+  transition: background .3s;
+}
+.sp-bar:hover { background: var(--amber-l); }
+.sp-v { font-family: 'EB Garamond', serif; font-size: 14px; color: var(--mid); }
+.sp-k { font-size: 9px; letter-spacing: .2em; color: var(--pale); }
+
+/* ── DO DON'T ── */
+.dd-section { padding: 64px 80px 100px; background: var(--bg-mid); }
+.dd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
+.dd-card { background: var(--bg); padding: 40px 36px; border-top: 3px solid transparent; }
+.dd-card.do   { border-top-color: var(--ink); }
+.dd-card.dont { border-top-color: var(--pale); }
+.dd-head {
+  font-size: 11px; letter-spacing: .24em; margin-bottom: 24px;
+  display: flex; align-items: center; gap: 10px;
+}
+.dd-card.do   .dd-head { color: var(--ink); }
+.dd-card.dont .dd-head { color: var(--pale); }
+.dd-items { display: flex; flex-direction: column; gap: 14px; }
+.dd-item {
+  font-size: 14px; letter-spacing: .06em; line-height: 1.9;
+  padding-left: 18px; position: relative;
+}
+.dd-item::before {
+  content: ''; position: absolute; left: 0; top: 9px;
+  width: 6px; height: 6px; border-radius: 50%;
+}
+.dd-card.do   .dd-item::before { background: var(--ink); }
+.dd-card.dont .dd-item::before { background: var(--pale); }
+
+/* ── APPLICATIONS ── */
+.app-section { padding: 64px 80px 120px; }
+.app-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+.app-card {
+  border: 1px solid var(--rule); padding: 36px 32px 28px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.app-icon {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--bg-mid);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Noto Serif SC', serif; font-size: 18px; color: var(--ink);
+}
+.app-name {
+  font-family: 'Noto Serif SC', serif; font-size: 18px;
+  font-weight: 400; letter-spacing: .15em;
+}
+.app-desc { font-size: 13px; line-height: 2; color: var(--mid); letter-spacing: .05em; }
+.app-status {
+  font-size: 10px; letter-spacing: .2em; padding: 4px 10px;
+  border: 1px solid var(--rule); display: inline-block;
+  align-self: flex-start; color: var(--mid);
+}
+.app-status.done { border-color: var(--ink); color: var(--ink); }
+
+/* ── BACK-COVER ── */
+.back-cover {
+  background: var(--ink); padding: 120px 80px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 40vh; text-align: center;
+}
+.bc-text {
+  font-family: 'Noto Serif SC', serif; font-weight: 300;
+  font-size: clamp(18px, 2.5vw, 28px); letter-spacing: .35em;
+  line-height: 2.2; color: oklch(68% 0.010 70);
+}
+.bc-logo {
+  font-family: 'Noto Serif SC', serif; font-weight: 400;
+  font-size: 48px; letter-spacing: .5em; color: oklch(88% 0.010 76);
+  margin-top: 48px;
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-ghost" aria-hidden="true">积偶</div>
+  <div class="cover-label">Brand Visual Guidelines · 品牌视觉规范</div>
+  <div class="cover-title">积&ensp;偶</div>
+  <div class="cover-sub">JIOU Fermented Plum Wine</div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <span class="cover-meta-k">VERSION</span>
+      <span class="cover-meta-v">V 1.0 — 2024</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-k">BRAND</span>
+      <span class="cover-meta-v">积偶醇酿</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-k">COMPANY</span>
+      <span class="cover-meta-v">四川长蕴酒业有限责任公司</span>
+    </div>
+  </div>
+</div>
+
+<!-- 01 COLORS -->
+<div class="sec-head">
+  <span class="sec-num">01</span>
+  <span class="sec-name">品牌色彩</span>
+  <span class="sec-name-en">Brand Colors</span>
+</div>
+<div class="colors-section page-wrap">
+  <!-- Primary swatches -->
+  <div class="color-row">
+    <div class="swatch" style="background:oklch(17% 0.014 52);">
+      <span class="swatch-role" style="color:oklch(40% 0.009 58);">PRIMARY</span>
+      <span class="swatch-name" style="color:oklch(88% 0.010 76);">墨</span>
+      <span class="swatch-hex" style="color:oklch(50% 0.009 58);">#1E1B18 · Ink</span>
+    </div>
+    <div class="swatch" style="background:oklch(96.5% 0.010 78);">
+      <span class="swatch-role" style="color:var(--pale);">GROUND</span>
+      <span class="swatch-name" style="color:var(--ink);">奶白</span>
+      <span class="swatch-hex" style="color:var(--mid);">#F5F0E8 · Cream</span>
+    </div>
+    <div class="swatch" style="background:oklch(66% 0.130 66);">
+      <span class="swatch-role" style="color:oklch(80% 0.08 68);">ACCENT</span>
+      <span class="swatch-name" style="color:oklch(96% 0.010 78);">琥珀</span>
+      <span class="swatch-hex" style="color:oklch(88% 0.06 72);">#C49A3C · Amber</span>
+    </div>
+  </div>
+  <!-- Secondary -->
+  <div class="color-row">
+    <div class="swatch" style="background:oklch(93% 0.014 76); height:96px;">
+      <span class="swatch-name" style="color:var(--ink);">奶米</span>
+      <span class="swatch-hex" style="color:var(--mid);">#EDE6D9 · Cream Mid</span>
+    </div>
+    <div class="swatch" style="background:oklch(88% 0.018 74); height:96px;">
+      <span class="swatch-name" style="color:var(--ink);">淡陶</span>
+      <span class="swatch-hex" style="color:var(--mid);">#E0D6C5 · Cream Deep</span>
+    </div>
+    <div class="swatch" style="background:oklch(52% 0.010 58); height:96px;">
+      <span class="swatch-name" style="color:oklch(88% 0.010 76);">烟灰</span>
+      <span class="swatch-hex" style="color:oklch(72% 0.008 62);">#7A7060 · Ink Mid</span>
+    </div>
+    <div class="swatch" style="background:oklch(80% 0.100 72); height:96px;">
+      <span class="swatch-name" style="color:var(--ink);">浅金</span>
+      <span class="swatch-hex" style="color:var(--mid);">#D9B96A · Amber Light</span>
+    </div>
+    <div class="swatch" style="background:oklch(62% 0.080 148); height:96px;">
+      <span class="swatch-name" style="color:oklch(96% 0.010 78);">青苔</span>
+      <span class="swatch-hex" style="color:oklch(82% 0.06 148);">#5E8C6A · Sage</span>
+    </div>
+  </div>
+
+  <div class="color-usage">
+    <div class="cu-title">COLOR USAGE · 使用规则</div>
+    <div class="cu-grid">
+      <div class="cu-item">
+        <div class="cu-dot" style="background:oklch(17% 0.014 52);"></div>
+        <div class="cu-k">墨 · Ink</div>
+        <div class="cu-v">主文字、深色背景、<br>品牌Logo、线框</div>
+      </div>
+      <div class="cu-item">
+        <div class="cu-dot" style="background:oklch(96.5% 0.010 78); border:1px solid var(--rule);"></div>
+        <div class="cu-k">奶白 · Cream</div>
+        <div class="cu-v">主背景色、深色背景<br>上的反白文字</div>
+      </div>
+      <div class="cu-item">
+        <div class="cu-dot" style="background:oklch(66% 0.130 66);"></div>
+        <div class="cu-k">琥珀 · Amber</div>
+        <div class="cu-v">唯一强调色，用于<br>标签装饰线、CTA按钮</div>
+      </div>
+      <div class="cu-item">
+        <div class="cu-dot" style="background:oklch(93% 0.014 76); border:1px solid var(--rule);"></div>
+        <div class="cu-k">奶米 · Cream Mid</div>
+        <div class="cu-v">次级背景、卡片底色、<br>悬停状态</div>
+      </div>
+      <div class="cu-item">
+        <div class="cu-dot" style="background:oklch(52% 0.010 58);"></div>
+        <div class="cu-k">烟灰 · Ink Mid</div>
+        <div class="cu-v">辅助文字、注释、<br>次要信息</div>
+      </div>
+      <div class="cu-item">
+        <div class="cu-dot" style="background:oklch(62% 0.080 148);"></div>
+        <div class="cu-k">青苔 · Sage</div>
+        <div class="cu-v">少量点缀，呼应青梅，<br>不可大面积使用</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 TYPOGRAPHY -->
+<div class="sec-head" style="background:var(--bg-mid);">
+  <span class="sec-num">02</span>
+  <span class="sec-name">字体系统</span>
+  <span class="sec-name-en">Typography</span>
+</div>
+<div class="type-section page-wrap" style="background:var(--bg-mid);">
+
+  <!-- 主标题字体 -->
+  <div class="type-block">
+    <div class="type-meta">
+      <div class="tm-item"><div class="tm-k">用途</div><div class="tm-v">中文标题 · 品牌名 · 展示性文字</div></div>
+      <div class="tm-item"><div class="tm-k">字体</div><div class="tm-v">Noto Serif SC</div></div>
+      <div class="tm-item"><div class="tm-k">字重</div><div class="tm-v">Light 300 / Regular 400</div></div>
+    </div>
+    <div class="type-sample-zh">积偶醇酿</div>
+    <div class="type-sample-zh" style="font-size:clamp(20px,2.5vw,32px); color:var(--mid); font-weight:300;">
+      不是为了忘，是为了记
+    </div>
+    <div class="type-scale">
+      <div class="ts-row">
+        <span class="ts-label">Display</span>
+        <span class="ts-sample" style="font-size:72px; letter-spacing:.4em;">积偶</span>
+        <span class="ts-spec">72px / ls .4em</span>
+      </div>
+      <div class="ts-row">
+        <span class="ts-label">H1</span>
+        <span class="ts-sample" style="font-size:48px; letter-spacing:.3em;">品牌故事</span>
+        <span class="ts-spec">48px / ls .3em</span>
+      </div>
+      <div class="ts-row">
+        <span class="ts-label">H2</span>
+        <span class="ts-sample" style="font-size:32px; letter-spacing:.2em;">适合积偶的时刻</span>
+        <span class="ts-spec">32px / ls .2em</span>
+      </div>
+      <div class="ts-row">
+        <span class="ts-label">H3</span>
+        <span class="ts-sample" style="font-size:22px; letter-spacing:.18em;">独处的傍晚</span>
+        <span class="ts-spec">22px / ls .18em</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 英文字体 -->
+  <div class="type-block">
+    <div class="type-meta">
+      <div class="tm-item"><div class="tm-k">用途</div><div class="tm-v">英文标题 · 数字 · 装饰性文字</div></div>
+      <div class="tm-item"><div class="tm-k">字体</div><div class="tm-v">EB Garamond</div></div>
+      <div class="tm-item"><div class="tm-k">字重</div><div class="tm-v">Regular 400 · Italic</div></div>
+    </div>
+    <div class="type-sample-en">JIOU · Plum Wine</div>
+    <div class="type-sample-en" style="font-size:22px; color:var(--mid);">
+      Since 2023 · 12% vol · 350 ml
+    </div>
+  </div>
+
+  <!-- 正文字体 -->
+  <div class="type-block">
+    <div class="type-meta">
+      <div class="tm-item"><div class="tm-k">用途</div><div class="tm-v">正文 · 注释 · 产品说明</div></div>
+      <div class="tm-item"><div class="tm-k">字体</div><div class="tm-v">Noto Sans SC</div></div>
+      <div class="tm-item"><div class="tm-k">字重</div><div class="tm-v">Light 300 / Regular 400</div></div>
+    </div>
+    <div class="type-sample-body">
+      积偶，取自「积累的偶然」。那些慢慢堆叠起来的，刚好的时间，
+      刚好的心情，刚好遇见的自己。鲜果发酵，低糖，零添加。
+      不是因为健康更高级，是因为好东西本来就不需要掩盖。
+    </div>
+    <div class="type-scale">
+      <div class="ts-row">
+        <span class="ts-label">正文大</span>
+        <span class="ts-sample" style="font-family:'Noto Sans SC',sans-serif; font-size:16px; font-weight:300; letter-spacing:.08em;">鲜果发酵，低糖，零添加</span>
+        <span class="ts-spec">16px / lh 2.2 / ls .08em</span>
+      </div>
+      <div class="ts-row">
+        <span class="ts-label">正文小</span>
+        <span class="ts-sample" style="font-family:'Noto Sans SC',sans-serif; font-size:14px; font-weight:300; letter-spacing:.06em;">生产单位：四川长蕴酒业有限责任公司</span>
+        <span class="ts-spec">14px / lh 2.0 / ls .06em</span>
+      </div>
+      <div class="ts-row">
+        <span class="ts-label">注释</span>
+        <span class="ts-sample" style="font-family:'Noto Sans SC',sans-serif; font-size:12px; font-weight:300; letter-spacing:.12em; color:var(--mid);">过量饮酒有害健康 · 孕妇及未成年人请勿饮酒</span>
+        <span class="ts-spec">12px / ls .12em</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 LOGO -->
+<div class="sec-head">
+  <span class="sec-num">03</span>
+  <span class="sec-name">Logo 规范</span>
+  <span class="sec-name-en">Logo Usage</span>
+</div>
+<div class="logo-section page-wrap">
+  <div class="logo-grid">
+    <div class="logo-card dark">
+      <div class="logo-display on-dark">积&ensp;偶</div>
+      <div class="logo-card-label">深色背景 · 标准用法</div>
+    </div>
+    <div class="logo-card light">
+      <div class="logo-display on-light">积&ensp;偶</div>
+      <div class="logo-card-label">浅色背景 · 标准用法</div>
+    </div>
+    <div class="logo-card mid">
+      <div class="logo-display on-light" style="font-size:56px; color:var(--ink);">积&ensp;偶</div>
+      <div class="logo-card-label">中性背景 · 常规用法</div>
+    </div>
+    <div class="logo-card amber">
+      <div class="logo-display on-amber" style="font-size:56px;">积&ensp;偶</div>
+      <div class="logo-card-label">强调色背景 · 限量使用</div>
+    </div>
+  </div>
+
+  <div class="logo-rules">
+    <div class="lr-title">LOGO RULES · 使用规则</div>
+    <div class="lr-list">
+      <div class="lr-item">
+        <span class="lr-num">01</span>
+        <span class="lr-text"><strong>字距保持宽松</strong>：Logo 字间距不低于 0.4em，为品牌名保留呼吸感</span>
+      </div>
+      <div class="lr-item">
+        <span class="lr-num">02</span>
+        <span class="lr-text"><strong>仅使用规范色</strong>：Logo 仅允许出现在墨色（#1E1B18）或奶白色（#F5F0E8）两种版本</span>
+      </div>
+      <div class="lr-item">
+        <span class="lr-num">03</span>
+        <span class="lr-text"><strong>禁止变形拉伸</strong>：保持原始比例，禁止旋转、倾斜、添加阴影或渐变效果</span>
+      </div>
+      <div class="lr-item">
+        <span class="lr-num">04</span>
+        <span class="lr-text"><strong>最小尺寸</strong>：印刷品不小于 14mm 字高，屏幕不小于 28px 字高</span>
+      </div>
+      <div class="lr-item">
+        <span class="lr-num">05</span>
+        <span class="lr-text"><strong>保护区域</strong>：Logo 四周留白不少于字高的 50%，不可与其他元素过近</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 04 BRAND VOICE -->
+<div class="voice-section">
+  <div class="sec-head" style="border-bottom-color:oklch(28% 0.010 52); padding:0 0 56px;">
+    <span class="sec-num" style="color:oklch(32% 0.009 55);">04</span>
+    <span class="sec-name" style="color:oklch(88% 0.010 76);">品牌语气</span>
+    <span class="sec-name-en" style="color:oklch(45% 0.010 60);">Brand Voice</span>
+  </div>
+  <div class="voice-grid">
+    <div class="vc">
+      <div class="vc-label">TONE 01</div>
+      <div class="vc-title">克制，不煽情</div>
+      <div class="vc-examples">
+        <div class="vc-ex good">✓ &nbsp;此刻，刚好</div>
+        <div class="vc-ex good">✓ &nbsp;不是为了忘，是为了记</div>
+        <div class="vc-ex bad">✗ &nbsp;让你感受到最美的时光！</div>
+        <div class="vc-ex bad">✗ &nbsp;每一口都充满幸福感～</div>
+      </div>
+    </div>
+    <div class="vc">
+      <div class="vc-label">TONE 02</div>
+      <div class="vc-title">具体，不抽象</div>
+      <div class="vc-examples">
+        <div class="vc-ex good">✓ &nbsp;一个人的桌，一瓶刚开的酒</div>
+        <div class="vc-ex good">✓ &nbsp;聊到灯光暗了也不想散</div>
+        <div class="vc-ex bad">✗ &nbsp;品质生活的完美选择</div>
+        <div class="vc-ex bad">✗ &nbsp;感受东方美学的精髓</div>
+      </div>
+    </div>
+    <div class="vc">
+      <div class="vc-label">TONE 03</div>
+      <div class="vc-title">真实，不夸大</div>
+      <div class="vc-examples">
+        <div class="vc-ex good">✓ &nbsp;零添加，配料只有四种</div>
+        <div class="vc-ex good">✓ &nbsp;12度，适合随性小酌</div>
+        <div class="vc-ex bad">✗ &nbsp;全网最好喝的青梅酒！</div>
+        <div class="vc-ex bad">✗ &nbsp;百分之百纯天然无污染</div>
+      </div>
+    </div>
+    <div class="vc">
+      <div class="vc-label">TONE 04</div>
+      <div class="vc-title">东方，不刻意</div>
+      <div class="vc-examples">
+        <div class="vc-ex good">✓ &nbsp;积累的偶然</div>
+        <div class="vc-ex good">✓ &nbsp;四川峨边，青梅与时间沉淀</div>
+        <div class="vc-ex bad">✗ &nbsp;匠心精神，千年传承工艺</div>
+        <div class="vc-ex bad">✗ &nbsp;源自东方古法酿造秘方</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 05 DO & DON'T -->
+<div class="sec-head" style="background:var(--bg-mid);">
+  <span class="sec-num">05</span>
+  <span class="sec-name">规范与禁忌</span>
+  <span class="sec-name-en">Do & Don't</span>
+</div>
+<div class="dd-section">
+  <div class="dd-grid">
+    <div class="dd-card do">
+      <div class="dd-head">✓ &ensp;DO · 应做</div>
+      <div class="dd-items">
+        <div class="dd-item">保持大量留白，给画面充分呼吸空间</div>
+        <div class="dd-item">文字排列使用宽字距（≥0.1em），体现克制美感</div>
+        <div class="dd-item">标题优先使用宋体（Noto Serif SC），保持东方气质</div>
+        <div class="dd-item">琥珀色作为唯一强调色，单次画面中仅用于一处重点</div>
+        <div class="dd-item">产品图保留透明背景，展示瓶身实物质感</div>
+        <div class="dd-item">文案保持简短有力，优先用具体场景代替抽象描述</div>
+      </div>
+    </div>
+    <div class="dd-card dont">
+      <div class="dd-head">✗ &ensp;DON'T · 禁忌</div>
+      <div class="dd-items">
+        <div class="dd-item">禁止使用渐变背景，包括琥珀色渐变</div>
+        <div class="dd-item">禁止在奶白背景上叠加过多色块，保持纯净感</div>
+        <div class="dd-item">禁止使用圆角卡片加左侧彩色边框的设计套路</div>
+        <div class="dd-item">禁止过度使用图标，能用文字表达的不用图标</div>
+        <div class="dd-item">禁止夸张的字重变化，避免粗黑体标题</div>
+        <div class="dd-item">禁止在产品图上叠加任何文字水印或装饰物</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 06 APPLICATIONS -->
+<div class="sec-head">
+  <span class="sec-num">06</span>
+  <span class="sec-name">物料应用</span>
+  <span class="sec-name-en">Applications</span>
+</div>
+<div class="app-section page-wrap">
+  <div class="app-grid">
+    <div class="app-card">
+      <div class="app-icon">网</div>
+      <div class="app-name">产品官网</div>
+      <div class="app-desc">滚动长页，深色+奶白双色交替，产品瓶身悬浮动效</div>
+      <span class="app-status done">✓ 已完成</span>
+    </div>
+    <div class="app-card">
+      <div class="app-icon">详</div>
+      <div class="app-name">电商详情页</div>
+      <div class="app-desc">竖版长图，适配天猫/淘宝，750px 宽，重点突出零添加与场景</div>
+      <span class="app-status">待制作</span>
+    </div>
+    <div class="app-card">
+      <div class="app-icon">书</div>
+      <div class="app-name">小红书模板</div>
+      <div class="app-desc">1:1 方图，3种场景模板，奶白底+宋体大字，克制文艺风</div>
+      <span class="app-status">待制作</span>
+    </div>
+    <div class="app-card">
+      <div class="app-icon">册</div>
+      <div class="app-name">招商品牌册</div>
+      <div class="app-desc">PPT格式，16:9，深色封面，融合品牌故事与市场数据</div>
+      <span class="app-status">待制作</span>
+    </div>
+    <div class="app-card">
+      <div class="app-icon">包</div>
+      <div class="app-name">包装延展</div>
+      <div class="app-desc">礼盒、手提袋、封口贴纸，延续标签视觉语言</div>
+      <span class="app-status">待制作</span>
+    </div>
+    <div class="app-card">
+      <div class="app-icon">礼</div>
+      <div class="app-name">礼品定制</div>
+      <div class="app-desc">刻字瓶身、礼盒腰封，节日限定包装</div>
+      <span class="app-status">待制作</span>
+    </div>
+  </div>
+</div>
+
+<!-- BACK COVER -->
+<div class="back-cover">
+  <div class="bc-text">
+    积累的偶然<br>
+    此刻，刚好
+  </div>
+  <div class="bc-logo">积&ensp;偶</div>
+</div>
+
+</body>
+</html>
